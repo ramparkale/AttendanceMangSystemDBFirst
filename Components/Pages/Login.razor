@@ -1,0 +1,53 @@
+﻿@page "/login"
+
+
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+
+@* <EditForm Model="loginModel" OnValidSubmit="UserLogin"> *@
+<EditForm Model="loginModel"
+          OnValidSubmit="ULogin"
+          FormName="LoginForm">
+    <DataAnnotationsValidator />
+
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>User Name</label>
+        <InputText class="form-control"
+                   @bind-Value="loginModel.Username" />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <InputText class="form-control"
+                   type="password"
+                   @bind-Value="loginModel.Password" />
+    </div>
+
+    <button class="btn btn-primary">
+        Login
+    </button>
+
+</EditForm>
+
+<p class="text-danger">@message</p>
+
+@code {
+
+    LoginModel loginModel = new();
+
+    string message = "";
+
+    async Task ULogin() 
+    {
+        bool success = await AuthService.Login(loginModel);
+
+        if (success)
+            Navigation.NavigateTo("/Dashboard");
+
+        else
+            message = "Invalid Username or Password";
+    }
+
+}

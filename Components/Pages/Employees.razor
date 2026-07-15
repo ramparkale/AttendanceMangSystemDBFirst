@@ -1,0 +1,52 @@
+﻿@page "/employees"
+@using AttendanceMangSystemDBFirst.Models
+
+@inject EmployeeService employeeService
+
+<h3>Employees</h3>
+
+<table class="table">
+
+    <thead>
+
+        <tr>
+
+            <th>Name</th>
+
+            <th>Email</th>
+
+            <th>Mobile</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in employees)
+        {
+            <tr>
+
+                <td>@item.EmployeeName</td>
+
+                <td>@item.Email</td>
+
+                <td>@item.Mobile</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@code {
+
+    List<Employee> employees = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await employeeService.GetEmployees();
+    }
+
+}

@@ -1,0 +1,26 @@
+﻿@page "/attendance"
+
+@inject AttendanceService attendanceService
+
+<button class="btn btn-success"
+        @onclick="CheckIn">
+    Check In
+</button>
+<button class="btn btn-danger"
+        @onclick="CheckOut">
+    Check Out
+</button>
+
+@code {
+
+    int employeeId = 1;
+
+    async Task CheckIn()
+    {
+        await attendanceService.CheckIn(employeeId);
+    }
+    async Task CheckOut()
+    {
+        await attendanceService.CheckOut(1);
+    }
+} 

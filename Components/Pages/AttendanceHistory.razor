@@ -1,0 +1,51 @@
+﻿@page "/attendance-history"
+
+@inject AttendanceService attendanceService
+
+<h3>Attendance History</h3>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Hours</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in attendanceList)
+        {
+            <tr>
+
+                <td>@item.AttendanceDate</td>
+
+                <td>@item.CheckIn</td>
+
+                <td>@item.CheckOut</td>
+
+                <td>@item.WorkingHours</td>
+
+                <td>@item.Status</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@code {
+
+    List<AttendanceMangSystemDBFirst.Models.Attendance> attendanceList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        attendanceList = await attendanceService.GetHistory(1);
+    }
+
+}
