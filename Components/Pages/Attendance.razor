@@ -13,7 +13,7 @@
 
 @code {
 
-    int employeeId = 1;
+    int employeeId = 2;
 
     async Task CheckIn()
     {
@@ -21,6 +21,6 @@
     }
     async Task CheckOut()
     {
-        await attendanceService.CheckOut(1);
+        await attendanceService.CheckOut(employeeId);
     }
 } 
